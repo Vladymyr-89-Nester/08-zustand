@@ -8,11 +8,10 @@ import { useEffect, useRef, useState } from 'react';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import { useDebounce } from 'use-debounce';
 import Pagination from '@/components/Pagination/Pagination';
-import Modal from '@/components/Modal/Modal';
-import NoteForm from '@/components/NoteForm/NoteForm';
 import Loader from '@/components/Loader/Loader';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import toast, { Toaster } from 'react-hot-toast';
+import Link from 'next/link';
 
 interface Props {
   tag?: string;
@@ -22,7 +21,6 @@ export default function NotesClient({ tag }: Props) {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
   const [queryDebounce] = useDebounce(query.trim(), 700);
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const hasShownEmptyToast = useRef(false);
   const prevQuery = useRef('');
 
@@ -62,14 +60,6 @@ export default function NotesClient({ tag }: Props) {
     setPage(1);
   };
 
-  const handleOpenModal = () => {
-    setIsOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-  };
-
   return (
     <div className={css.app}>
       <Toaster position='top-right' />
@@ -83,19 +73,14 @@ export default function NotesClient({ tag }: Props) {
             onPageChange={setPage}
           />
         )}
-        <button className={css.button} onClick={handleOpenModal}>
+        <Link className={css.button} href='/notes/action/create'>
           Create note +
-        </button>
+        </Link>
       </header>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {!isLoading && !error && data && data.notes.length > 0 && (
         <NoteList notes={data.notes} />
-      )}
-      {isOpenModal && (
-        <Modal onClose={handleCloseModal}>
-          <NoteForm onClose={handleCloseModal} />
-        </Modal>
       )}
     </div>
   );

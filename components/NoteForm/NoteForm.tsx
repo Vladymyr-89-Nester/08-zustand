@@ -5,10 +5,6 @@ import { createNote, type CreateNoteParams } from '@/lib/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 
-interface NoteFormProps {
-  onClose: () => void;
-}
-
 const validationSchema = Yup.object({
   title: Yup.string()
     .min(3, 'Title must be at least 3 characters')
@@ -23,14 +19,14 @@ const validationSchema = Yup.object({
     .required('Please select a tag'),
 });
 
-export default function NoteForm({ onClose }: NoteFormProps) {
+export default function NoteForm() {
   const queryClient = useQueryClient();
 
   const createNoteMutation = useMutation({
     mutationFn: (newNote: CreateNoteParams) => createNote(newNote),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['notes'] });
-      onClose();
+
       toast.success('Note added successfully!', { duration: 7000 });
     },
     onError: () => {
@@ -108,7 +104,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
         </div>
 
         <div className={css.actions}>
-          <button type='button' className={css.cancelButton} onClick={onClose}>
+          <button type='button' className={css.cancelButton}>
             Cancel
           </button>
           <button type='submit' className={css.submitButton}>
