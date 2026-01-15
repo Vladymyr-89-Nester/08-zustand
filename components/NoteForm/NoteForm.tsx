@@ -127,9 +127,6 @@ export default function NoteForm() {
             onChange={handleChange}
             value={draft.tag}
           >
-            <option value='' hidden>
-              Select a tag
-            </option>
             <option value='Todo'>Todo</option>
             <option value='Work'>Work</option>
             <option value='Personal'>Personal</option>

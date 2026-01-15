@@ -14,18 +14,18 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
 
-  const generateCategoty = (): string => {
+  const generateCategory = (): string => {
     if (slug[0] === 'all') return 'all';
 
     return slug[0];
   };
   return {
-    title: 'NoteHub Categoty',
-    description: `Viewing notes filtered by ${generateCategoty()}`,
+    title: 'NoteHub Category',
+    description: `Viewing notes filtered by ${generateCategory()}`,
     openGraph: {
-      title: 'NoteHub Categoty',
-      description: `Viewing notes filtered by ${generateCategoty()}`,
-      url: `https://08-zustand-five-liart.vercel.app/notes/filter/${generateCategoty()}`,
+      title: 'NoteHub Category',
+      description: `Viewing notes filtered by ${generateCategory()}`,
+      url: `https://08-zustand-five-liart.vercel.app/notes/filter/${generateCategory()}`,
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',

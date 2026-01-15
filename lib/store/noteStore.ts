@@ -5,7 +5,7 @@ import { persist } from 'zustand/middleware';
 const initialDraft: CreateNoteParams = {
   title: '',
   content: '',
-  tag: '',
+  tag: 'Todo',
 };
 
 interface NoteDraftStore {
