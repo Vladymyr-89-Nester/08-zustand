@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'NoteHub',
     description: 'NoteHub — application for creating and managing notes',
-    url: 'https://07-routing-nextjs-lovat-tau.vercel.app/',
+    url: 'https://08-zustand-five-liart.vercel.app/',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
@@ -22,6 +23,13 @@ export const metadata: Metadata = {
   },
 };
 
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-roboto',
+  display: 'swap',
+});
+
 interface Props {
   children: React.ReactNode;
   modal: React.ReactNode;
@@ -30,7 +38,7 @@ interface Props {
 export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang='en'>
-      <body>
+      <body className={roboto.variable}>
         <TanStackProvider>
           <Header />
           <main>

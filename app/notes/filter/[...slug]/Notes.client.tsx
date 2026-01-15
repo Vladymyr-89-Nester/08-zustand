@@ -2,7 +2,7 @@
 
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import NoteList from '@/components/NoteList/NoteList';
-import css from './page.module.css';
+import css from './Notes.client.module.css';
 import { fetchNotes } from '@/lib/api';
 import { useEffect, useRef, useState } from 'react';
 import SearchBox from '@/components/SearchBox/SearchBox';
@@ -34,7 +34,7 @@ export default function NotesClient({ tag }: Props) {
         tag: tag === 'all' ? undefined : tag,
       }),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
+    // refetchOnMount: false,
   });
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function NotesClient({ tag }: Props) {
             onPageChange={setPage}
           />
         )}
-        <Link className={css.button} href='/notes/action/create'>
+        <Link className={css.link} href='/notes/action/create'>
           Create note +
         </Link>
       </header>
